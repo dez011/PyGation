@@ -1,32 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, request
 import sys
 
+from Mock_GPIO import MockGPIO
+
 if sys.platform == 'linux':
+    print("Running on Raspberry Pi, using RPi.GPIO")
     import RPi.GPIO as GPIO
 else:
     # Mock RPi.GPIO for development on non-Raspberry Pi platforms
-    class MockGPIO:
-        BCM = 'BCM'
-        OUT = 'OUT'
-        IN = 'IN'
-        HIGH = 'HIGH'
-        LOW = 'LOW'
-
-        def setmode(self, mode):
-            print(f"GPIO mode set to {mode}")
-
-        def setup(self, channel, mode):
-            print(f"GPIO channel {channel} set up as {mode}")
-
-        def output(self, channel, state):
-            print(f"GPIO channel {channel} output set to {state}")
-
-        def input(self, channel):
-            return self.LOW
-
-        def cleanup(self):
-            print("GPIO cleanup called")
-
+    print("Running on non-Raspberry Pi platform, using mock GPIO")
 
     GPIO = MockGPIO()
 
@@ -53,3 +35,9 @@ if __name__ == '__main__':
         app.run(host='0.0.0.0', port=5001)
     finally:
         GPIO.cleanup()
+
+'''
+ssh miguelh@192.168.6.14
+
+git -C ~/PyGation pull && python3 ~/PyGation/Irration.py
+'''
