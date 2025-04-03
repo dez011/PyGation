@@ -5,17 +5,21 @@ class MockGPIO:
     HIGH = 'HIGH'
     LOW = 'LOW'
 
-    def setmode(self, mode):
-        print(f"GPIO mode set to {mode}")
+    @staticmethod
+    def setmode(mode):
+        print(f"MOCK GPIO mode set to {mode}")
 
-    def setup(self, channel, mode):
-        print(f"GPIO channel {channel} set up as {mode}")
+    @staticmethod
+    def setup(channel, mode):
+        print(f"MOCK GPIO channel {channel} set up as {mode}")
 
-    def output(self, channel, state):
-        print(f"GPIO channel {channel} output set to {state}")
+    @staticmethod
+    def output(channel, state):
+        print(f"MOCK GPIO channel {channel} output set to {state}")
 
     def input(self, channel):
         return self.LOW
 
-    def cleanup(self):
-        print("GPIO cleanup called")
+    @staticmethod
+    def cleanup():
+        print("MOCK GPIO cleanup called")
