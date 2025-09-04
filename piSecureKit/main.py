@@ -52,7 +52,7 @@ def generate_frames():
         if not ret:
             continue
         yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
+               b'Content-Type: image/jpeg\r\n\r\n' + buffer + b'\r\n')
 
 @app.route('/video_feed')
 def video_feed():
