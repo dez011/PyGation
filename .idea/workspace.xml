@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="Fixed for picamera2">
-      <change afterPath="$PROJECT_DIR$/piSecureKit/install_deps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="Testing refactored main" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -293,7 +290,23 @@
       <option name="project" value="LOCAL" />
       <updated>1756957083174</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Fixed for picamera2">
+      <option name="closed" value="true" />
+      <created>1756957790958</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1756957790958</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Testing refactored main">
+      <option name="closed" value="true" />
+      <created>1756957962662</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1756957962662</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -305,7 +318,8 @@
     <MESSAGE value="Added pi stream main file" />
     <MESSAGE value="Added forward slash to route" />
     <MESSAGE value="Fixed for picamera2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed for picamera2" />
+    <MESSAGE value="Testing refactored main" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing refactored main" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

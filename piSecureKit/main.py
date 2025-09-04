@@ -10,6 +10,7 @@ import time
 import logging
 import subprocess
 import threading
+import atexit
 from datetime import datetime
 from threading import Condition
 
