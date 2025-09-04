@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="Added pi project and refactored directories">
+    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="Added forward slash to route">
+      <change afterPath="$PROJECT_DIR$/piSecureKit/Readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +213,23 @@
       <option name="project" value="LOCAL" />
       <updated>1756951095520</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added pi stream main file">
+      <option name="closed" value="true" />
+      <created>1756953153577</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1756953153577</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added forward slash to route">
+      <option name="closed" value="true" />
+      <created>1756953381727</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1756953381727</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -222,7 +238,9 @@
     <MESSAGE value="Added scheduling" />
     <MESSAGE value="Added config file" />
     <MESSAGE value="Added pi project and refactored directories" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added pi project and refactored directories" />
+    <MESSAGE value="Added pi stream main file" />
+    <MESSAGE value="Added forward slash to route" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added forward slash to route" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
