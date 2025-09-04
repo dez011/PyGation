@@ -49,3 +49,8 @@ sudo systemctl start piSecure
 # logs
 tail -f /opt/PyGation/piSecure.log
 
+
+#deps
+sudo apt update
+sudo apt install -y python3-flask python3-picamera2 libcamera-apps
+sudo apt install python3-flask-restful

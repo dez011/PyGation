@@ -32,11 +32,12 @@ class Camera:
         self.streamOut2 = FileOutput(self.streamOut)
         self.encoder.output = [self.streamOut2]
 
+        self.camera.start()
         self.camera.start_encoder(self.encoder)
         self.camera.start_recording(encoder, output)
 
     def get_frame(self):
-        self.camera.start()
+        # self.camera.start()
         with self.streamOut.condition:
             self.streamOut.condition.wait()
             self.frame = self.streamOut.frame
@@ -165,7 +166,8 @@ api.add_resource(VideoFeed, '/cam')
 
 @app.route('/video_feed')
 def video_feed():
-    return Response(generate_h264_stream(), content_type='video/h264')
+    return Response(genFrames(),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, threaded=True)
