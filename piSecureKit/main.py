@@ -43,7 +43,7 @@ def generate_frames():
         stream.seek(0)
         stream.truncate()
 
-@app.route('video_feed')
+@app.route('/video_feed')
 def video_feed():
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
