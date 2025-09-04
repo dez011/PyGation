@@ -25,7 +25,15 @@ except Exception:
             while True:
                 stream.write(b"dummy_frame_data")
                 yield stream
-
+try:
+    # noinspection PyUnresolvedReferences
+    import cv2  # real on Pi
+except ImportError:
+    class cv2:  # stub on Mac
+        @staticmethod
+        def imencode(ext, frame):
+            # Simulate successful encoding
+            return True, b"dummy_encoded_frame"
 
 # rest of your program
 
