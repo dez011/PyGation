@@ -55,8 +55,17 @@ def schedule_watering():
         interval = int(config[section]['interval'])
         duration = int(config[section]['duration'])
 
+        start_time_obj = time.strptime(start_time, '%H:%M')
+        end_time_obj = time.strptime(end_time, '%H:%M')
+
         schedule.every().day.at(start_time).do(water_plant, pin, duration)
-        schedule.every(interval).minutes.do(water_plant, pin, duration).until(end_time)
+
+        def schedule_interval_watering():
+            current_time = time.time()
+            if current_time < end_time_obj:
+                schedule.every(interval).minutes.do(water_plant, pin, duration).until(end_time_obj)
+
+        schedule.every().day.at(start_time).do(schedule_interval_watering)
 
 @app.route('/pump', methods=['POST'])
 def control_pump():
