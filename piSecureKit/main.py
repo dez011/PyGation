@@ -1,3 +1,46 @@
+#!/usr/bin/python3
+
+import socket
+from picamera2 import Picamera2
+from picamera2.encoders import H264Encoder
+from picamera2.outputs import FileOutput
+
+# Initialize Picamera2
+picam2 = Picamera2()
+video_config = picam2.create_video_configuration({"size": (640, 480)})
+picam2.configure(video_config)
+
+# Set up H.264 encoder
+encoder = H264Encoder(1000000)  # 1 Mbps bitrate
+
+# Create a socket server
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    sock.bind(("0.0.0.0", 5000))  # Host and port
+    sock.listen()
+
+    print("Waiting for a connection...")
+    conn, addr = sock.accept()
+    print(f"Connection established with {addr}")
+
+    # Stream H.264 video to the client
+    with conn.makefile("wb") as stream:
+        encoder.output = FileOutput(stream)
+        picam2.start_encoder(encoder)
+        picam2.start()
+        try:
+            while True:
+                pass  # Keep streaming until interrupted
+        except KeyboardInterrupt:
+            print("Streaming stopped.")
+        finally:
+            picam2.stop()
+            picam2.stop_encoder()
+
+
+
+
+# first
 import io
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -61,7 +104,8 @@ def video_feed():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, threaded=True)
-
+##first end
+##second
 # def generate_frames():
 #     camera = Picamera2()
 #     camera.resolution = (640, 480)
@@ -80,4 +124,4 @@ if __name__ == '__main__':
 #
 # if __name__ == '__main__':
 #     app.run(host='0.0.0.0', port=5000, threaded=True)
-
+##second end
