@@ -1,3 +1,6 @@
+sudo git clone https://github.com/dez011/PyGation.git /opt/PyGation
+sudo chown -R "$USER":"$USER" /opt/PyGation
+
 
 to pull and restart piSecure service
 git -C /opt/PyGation pull && sudo systemctl daemon-reload && sudo systemctl restart piSecure && systemctl status --no-pager -l piSecure
@@ -54,3 +57,5 @@ tail -f /opt/PyGation/piSecure.log
 sudo apt update
 sudo apt install -y python3-flask python3-picamera2 libcamera-apps
 sudo apt install python3-flask-restful
+
+#Example https://github.com/IcyG1045/CM4Cam/blob/main/camserver/camserver.py
