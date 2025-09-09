@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="Testing refactored main">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="Added stream to hub" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -303,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1756957962662</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Added stream to hub">
+      <created>1757452926054</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1757452926055</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -327,7 +332,8 @@
     <MESSAGE value="Added forward slash to route" />
     <MESSAGE value="Fixed for picamera2" />
     <MESSAGE value="Testing refactored main" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing refactored main" />
+    <MESSAGE value="Added stream to hub" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added stream to hub" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

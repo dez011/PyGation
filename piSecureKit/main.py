@@ -295,7 +295,7 @@ def video_stream():
     rtsp_url = f"rtsp://pi5.local:8554/{stream_name}"
     encoder = H264Encoder(bitrate=4_000_000)
     rtsp_out = FfmpegOutput(rtsp_url, audio=False)
-    picam2.start_recording(encoder, rtsp_out)
+    self.camera.start_recording(encoder, rtsp_out)
     return f"Publishing started to {rtsp_url}"
 
 
