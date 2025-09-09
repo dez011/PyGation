@@ -292,11 +292,31 @@ def video_feed():
 
 @app.route('/stream')
 def video_stream():
-    rtsp_url = f"rtsp://pi5.local:8554/{stream_name}"
-    encoder = H264Encoder(bitrate=4_000_000)
-    rtsp_out = FfmpegOutput(rtsp_url, audio=False)
-    self.camera.start_recording(encoder, rtsp_out)
-    return f"Publishing started to {rtsp_url}"
+    # rtsp_url = f"rtsp://pi5.local:8554/{stream_name}"
+    # encoder = H264Encoder(bitrate=4_000_000)
+    # rtsp_out = FfmpegOutput(rtsp_url, audio=False)
+    # camera.start_recording(encoder, rtsp_out)
+    # return f"Publishing started to {rtsp_url}"
+    """Start publishing the live H.264 to the hub via RTSP without restarting the encoder."""
+    if not camera or not camera.camera:
+        return "Camera not available", 500
+    try:
+        # Build the RTSP target (uses globals defined above)
+        rtsp_url_local = f"rtsp://pi5.local:8554/{stream_name}"
+        rtsp_out = FfmpegOutput(rtsp_url_local, audio=False)
+        # Append publish output to the existing H.264 encoder outputs
+        outs = camera.h264_encoder.output
+        if not isinstance(outs, (list, tuple)):
+            outs = [outs]
+        outs = [o for o in outs if o is not None]
+        outs.append(rtsp_out)
+        camera.h264_encoder.output = outs
+
+        logger.info(f"publishing started to {rtsp_url_local}")
+        return f"Publiching started to {rtsp_url_local}"
+    except Exception as e:
+        logger.exception("Failed to start publishing")
+        return f"Failed to start publishing: {e}", 500
 
 
 # ========================= API Resources =========================
