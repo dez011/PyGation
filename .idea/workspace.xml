@@ -67,6 +67,7 @@
   <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGation" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -88,6 +89,7 @@
     </configuration>
     <configuration name="Python tests for irrigation.test_Irrigation.Test" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="PyGation" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -102,6 +104,7 @@
     </configuration>
     <configuration name="Python tests for irrigation.test_Irrigation.Test.test_pump_on_command" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="PyGation" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -116,6 +119,7 @@
     </configuration>
     <configuration name="Python tests for irrigation.test_Irrigation.Test.test_run_schedule" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="PyGation" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -130,6 +134,7 @@
     </configuration>
     <configuration name="Python tests for irrigation.test_Irrigation.Test.test_schedule_watering" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="PyGation" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
