@@ -23,7 +23,7 @@ try:
     import picamera2
     from picamera2 import Picamera2
     from picamera2.encoders import H264Encoder, MJPEGEncoder
-    from picamera2.outputs import FileOutput, CircularOutput
+    from picamera2.outputs import FileOutput, CircularOutput, FfmpegOutput
     from libcamera import Transform
     CAMERA_AVAILABLE = True
 except ImportError:
@@ -41,6 +41,8 @@ CONFIG = {
     'VIDEO_DIR': '/home/allzero22/Webserver/webcam/static/video/',
     'SOUND_DIR': '/home/allzero22/Webserver/webcam/static/sound/'
 }
+stream_name = "fd"  # change to your deviceId
+rtsp_url = f"rtsp://pi5.local:8554/{stream_name}"
 
 # Configure logging
 logging.basicConfig(
@@ -286,7 +288,16 @@ def video_feed():
     return Response(
         gen_frames(camera),
         mimetype='multipart/x-mixed-replace; boundary=frame'
-    )
+    )\
+
+@app.route('/stream')
+def video_stream():
+    rtsp_url = f"rtsp://pi5.local:8554/{stream_name}"
+    encoder = H264Encoder(bitrate=4_000_000)
+    rtsp_out = FfmpegOutput(rtsp_url, audio=False)
+    picam2.start_recording(encoder, rtsp_out)
+    return f"Publishing started to {rtsp_url}"
+
 
 # ========================= API Resources =========================
 class VideoFeed(Resource):
