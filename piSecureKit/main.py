@@ -23,7 +23,7 @@ try:
     import picamera2
     from picamera2 import Picamera2
     from picamera2.encoders import H264Encoder, MJPEGEncoder
-    from picamera2.outputs import FileOutput, CircularOutput, FfmpegOutput
+    from picamera2.outputs import FileOutput, CircularOutput
     from libcamera import Transform
     CAMERA_AVAILABLE = True
 except ImportError:
@@ -39,9 +39,7 @@ CONFIG = {
     'ENCODER_BITRATE': 10000000,  # 10 Mbps
     'PICTURE_DIR': '/home/allzero22/Webserver/webcam/static/pictures/',
     'VIDEO_DIR': '/home/allzero22/Webserver/webcam/static/video/',
-    'SOUND_DIR': '/home/allzero22/Webserver/webcam/static/sound/',
-    'HUB_HOST': 'pi5.local',  # hostname or IP of the MediaMTX hub
-    'STREAM_NAME': 'testcam'  # default device_id / stream path
+    'SOUND_DIR': '/home/allzero22/Webserver/webcam/static/sound/'
 }
 
 # Configure logging
@@ -89,42 +87,19 @@ class Camera:
             self.streamOut2 = FileOutput(self.streamOut)
             self.encoder.output = [self.streamOut2]
 
-            # H264 encoder for recording and publishing
+            # H264 encoder for recording
             self.h264_encoder = H264Encoder()
             self.output = CircularOutput()
-            self.h264_encoder.output = [self.output]
 
             # Start camera and encoder
             self.camera.start()
             self.camera.start_encoder(self.encoder)
-            self.camera.start_recording(self.h264_encoder) #,self.output
-
-            self.publish_output = None
+            self.camera.start_recording(self.h264_encoder, self.output)
 
             logger.info("Camera initialized successfully")
         except Exception as e:
             logger.error(f"Failed to initialize camera: {e}")
             self.camera = None
-
-    def start_publishing(self, stream_name=None, hub_host=None):
-        """Start RTSP publishing"""
-        if not self.camera:
-            logger.error("Camera not initialized.")
-            return False
-
-        stream_name = stream_name or CONFIG['STREAM_NAME']
-        hub_host = hub_host or CONFIG['HUB_HOST']
-        rtsp_url = f"rtsp://{hub_host}:8554/{stream_name}"
-
-        try:
-            self.publish_output = FfmpegOutput(rtsp_url, audio=False)
-            self.h264_encoder.output = [self.output, self.publish_output]
-            self.camera.start_recording(self.h264_encoder)
-            logger.info(f"Started publishing to {rtsp_url}")
-            return True
-        except Exception as e:
-            logger.error(f"Failed to start publishing: {e}")
-            return False
 
     def get_frame(self):
         """Get a single frame from the camera"""
@@ -202,7 +177,6 @@ class Camera:
         """Clean up camera resources"""
         if self.camera:
             try:
-                self.camera.stop_recording()
                 self.camera.stop_encoder()
                 self.camera.stop()
                 logger.info("Camera resources released")
@@ -313,17 +287,6 @@ def video_feed():
         gen_frames(camera),
         mimetype='multipart/x-mixed-replace; boundary=frame'
     )
-
-@app.route('/publish/<stream_name>')
-def publish(stream_name):
-    """Start RTSP publishing for given stream name"""
-    if not camera:
-        return "Camera not available", 500
-    success = camera.start_publishing(stream_name)
-    if success:
-        return f"Publishing started for stream: {stream_name}"
-    else:
-        return "Failed to start publishing", 500
 
 # ========================= API Resources =========================
 class VideoFeed(Resource):
