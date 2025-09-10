@@ -67,7 +67,7 @@ try:
         os.rename('/home/allzero22/Webserver/webcam/static/pictures/camera-tmp.jpg',
                   '/home/allzero22/Webserver/webcam/static/pictures/camera.jpg')
         still.release()
-        os.rename('/dev/shm/camera-tmp.jpg', '/dev/shm/camera.jpg') # make image replacement atomic operation
+        # os.rename('/dev/shm/camera-tmp.jpg', '/dev/shm/camera.jpg') # make image replacement atomic operation
 except :
     print("exiting picamera2 streamer")
     picam2.stop_recording()
