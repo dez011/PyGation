@@ -59,3 +59,6 @@ sudo apt install -y python3-flask python3-picamera2 libcamera-apps
 sudo apt install python3-flask-restful
 
 #Example https://github.com/IcyG1045/CM4Cam/blob/main/camserver/camserver.py
+
+#view in browser
+http://192.168.6.76:8889/hqstream/ #or pi5.local:8889/hqstream/
