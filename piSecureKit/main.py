@@ -47,13 +47,8 @@ picam2.configure(video_config)
 # FFMPEG output config
 # HQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/hqstream", audio=False)
 # LQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/lqstream", audio=False)
-# HQoutput2 = FfmpegOutput(f"-f rtsp -rtsp_transport tcp rtsp://{USER}:{PASS}@{HUB}:8554/hqstream", audio=False)
-# LQoutput2 = FfmpegOutput(f"-f rtsp -rtsp_transport tcp rtsp://{USER}:{PASS}@{HUB}:8554/lqstream", audio=False)
-encHQ = H264Encoder(bitrate=6_000_000, repeat=True, iperiod=30)
-HQoutput = FfmpegOutput(f"-f rtsp -rtsp_transport tcp rtsp://{USER}:{PASS}@{HUB}:8554/hqstream", audio=False)
-
-encLQ = H264Encoder(bitrate=1_000_000, repeat=True, iperiod=30)
-LQoutput = FfmpegOutput(f"-f rtsp -rtsp_transport tcp rtsp://{USER}:{PASS}@{HUB}:8554/lqstream", audio=False)
+HQoutput = FfmpegOutput(f"-f rtsp -rtsp_transport udp rtsp://{USER}:{PASS}@{HUB}:8554/hqstream", audio=False)
+LQoutput = FfmpegOutput(f"-f rtsp -rtsp_transport udp rtsp://{USER}:{PASS}@{HUB}:8554/lqstream", audio=False)
 
 # Encoder settings
 encoder_HQ = H264Encoder(repeat=True, iperiod=30, framerate=frame_rate, enable_sps_framerate=True)
