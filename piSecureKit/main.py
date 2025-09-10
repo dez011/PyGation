@@ -62,10 +62,10 @@ try:
     while True:
         time.sleep(5)
         still = picam2.capture_request()
-        # still.save("main", "/dev/shm/camera-tmp.jpg")
-        still.save("main", "/home/allzero22/Webserver/webcam/static/pictures/camera-tmp.jpg")
-        os.rename('/home/allzero22/Webserver/webcam/static/pictures/camera-tmp.jpg',
-                  '/home/allzero22/Webserver/webcam/static/pictures/camera.jpg')
+        still.save("main", "/dev/shm/camera-tmp.jpg")
+        # still.save("main", "/home/allzero22/Webserver/webcam/static/pictures/camera-tmp.jpg")
+        # os.rename('/home/allzero22/Webserver/webcam/static/pictures/camera-tmp.jpg',
+        #           '/home/allzero22/Webserver/webcam/static/pictures/camera.jpg')
         still.release()
         # os.rename('/dev/shm/camera-tmp.jpg', '/dev/shm/camera.jpg') # make image replacement atomic operation
 except Exception as e:
