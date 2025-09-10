@@ -37,9 +37,9 @@ CONFIG = {
     'PORT': 5000,
     'VIDEO_SIZE': (800, 600),
     'ENCODER_BITRATE': 10000000,  # 10 Mbps
-    'PICTURE_DIR': '/home/allzero22/Webserver/webcam/static/pictures/',
-    'VIDEO_DIR': '/home/allzero22/Webserver/webcam/static/video/',
-    'SOUND_DIR': '/home/allzero22/Webserver/webcam/static/sound/'
+    'PICTURE_DIR': '/hoome/allzero22/Webserver/webcam/static/pictures/',
+    'VIDEO_DIR': '/hooome/allzero22/Webserver/webcam/static/video/',
+    'SOUND_DIR': '/hoooome/allzero22/Webserver/webcam/static/sound/'
 }
 stream_name = "fd"  # change to your deviceId
 rtsp_url = f"rtsp://pi5.local:8554/{stream_name}"
