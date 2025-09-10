@@ -30,7 +30,7 @@ except ImportError:
     logging.warning("Camera modules not available. Camera functionality will be disabled.")
     CAMERA_AVAILABLE = False
 
-HUB = "pi5.local"        # <-- Pi5 hub IP (not localhost)
+HUB = "192.168.6.76"        # <-- Pi5 hub IP (not localhost)
 USER = "myuser"
 PASS = "mypass"
 
@@ -47,7 +47,12 @@ picam2.configure(video_config)
 # FFMPEG output config
 # HQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/hqstream", audio=False)
 # LQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/lqstream", audio=False)
+# HQoutput2 = FfmpegOutput(f"-f rtsp -rtsp_transport tcp rtsp://{USER}:{PASS}@{HUB}:8554/hqstream", audio=False)
+# LQoutput2 = FfmpegOutput(f"-f rtsp -rtsp_transport tcp rtsp://{USER}:{PASS}@{HUB}:8554/lqstream", audio=False)
+encHQ = H264Encoder(bitrate=6_000_000, repeat=True, iperiod=30)
 HQoutput = FfmpegOutput(f"-f rtsp -rtsp_transport tcp rtsp://{USER}:{PASS}@{HUB}:8554/hqstream", audio=False)
+
+encLQ = H264Encoder(bitrate=1_000_000, repeat=True, iperiod=30)
 LQoutput = FfmpegOutput(f"-f rtsp -rtsp_transport tcp rtsp://{USER}:{PASS}@{HUB}:8554/lqstream", audio=False)
 
 # Encoder settings
