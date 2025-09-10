@@ -6,7 +6,7 @@ from datetime import datetime
 
 from flask import render_template, Response
 
-from main import logger, CONFIG, camera, app, stream_name
+from piSecureKit.main import logger, CONFIG, camera, app, stream_name
 
 import logging
 try:
