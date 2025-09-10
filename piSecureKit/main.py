@@ -12,8 +12,8 @@ from threading import Condition
 from flask import Flask, Response
 from flask_restful import Resource, Api
 
-from ./piSecureKit.Camera import Camera
-from ./piSecureKit.utils import gen_frames
+# from piSecureKit.Camera import Camera
+from piSecureKit.utils import gen_frames
 
 # Camera-specific imports
 try:
