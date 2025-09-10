@@ -68,6 +68,6 @@ try:
                   '/home/allzero22/Webserver/webcam/static/pictures/camera.jpg')
         still.release()
         # os.rename('/dev/shm/camera-tmp.jpg', '/dev/shm/camera.jpg') # make image replacement atomic operation
-except :
-    print("exiting picamera2 streamer")
+except Exception as e:
+    print("exiting picamera2 streamer due to exception:", e)
     picam2.stop_recording()
