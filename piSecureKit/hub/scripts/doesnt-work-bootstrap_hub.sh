@@ -57,6 +57,6 @@ sudo systemctl --no-pager -l status hub || true
 echo "[bootstrap] done."
 
 
-#sudo chmod +x /opt/PyGation/piSecureKit/hub/scripts/bootstrap_hub.sh
-#sudo /opt/PyGation/piSecureKit/hub/scripts/bootstrap_hub.sh
+#sudo chmod +x /opt/PyGation/piSecureKit/hub/scripts/doesnt-work-bootstrap_hub.sh
+#sudo /opt/PyGation/piSecureKit/hub/scripts/doesnt-work-bootstrap_hub.sh
 #sudo systemctl reload hub

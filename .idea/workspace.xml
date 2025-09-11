@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="webrtc working">
-      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/config/mediamtx.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/bootstrap_hub.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/deploy.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/hub.service" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/startHere.md" afterDir="false" />
+    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="Added hub dir and scripts/configs">
+      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/install_hub_unit.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/bootstrap_hub.sh" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/doesnt-work-bootstrap_hub.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/startHere.md" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/startHere.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -421,7 +418,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757474911508</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Added hub dir and scripts/configs">
+      <option name="closed" value="true" />
+      <created>1757605797496</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1757605797496</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -449,7 +454,8 @@
     <MESSAGE value="Fixed camera reference" />
     <MESSAGE value="New simpler code" />
     <MESSAGE value="webrtc working" />
-    <option name="LAST_COMMIT_MESSAGE" value="webrtc working" />
+    <MESSAGE value="Added hub dir and scripts/configs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added hub dir and scripts/configs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
