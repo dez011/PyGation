@@ -1,0 +1,9 @@
+services:
+  mediamtx:
+    image: bluenviron/mediamtx:latest #mediamtx:v2.0.8 example to not break in future
+    container_name: mediamtx
+    network_mode: host
+    volumes:
+      - ./config/mediamtx.yml:/mediamtx.yml:ro
+      - ./recordings:/recordings
+    restart: unless-stopped

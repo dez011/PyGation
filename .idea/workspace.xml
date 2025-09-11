@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="New simpler code" />
+    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="webrtc working">
+      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/config/mediamtx.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/bootstrap_hub.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/deploy.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/hub.service" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/startHere.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,28 +48,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python tests.Python tests for test_Irrigation.Test.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_control_pump.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_pump_off_command.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_pump_on_command.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_run_schedule.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_schedule_watering.executor&quot;: &quot;Debug&quot;,
-    &quot;Python tests.Python tests in test_Irrigation.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Irrigation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.hub.mediamtx: Compose Deployment.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_control_pump.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_pump_off_command.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_pump_on_command.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_run_schedule.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_schedule_watering.executor": "Debug",
+    "Python tests.Python tests in test_Irrigation.py.executor": "Run",
+    "Python.Irrigation.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHELLCHECK.PATH": "/Users/miguelh/Library/Application Support/JetBrains/PyCharmCE2025.1/plugins/Shell Script/shellcheck",
+    "git-widget-placeholder": "master"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/irrigation" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.old_main">
+  <component name="RunManager" selected="Docker.hub.mediamtx: Compose Deployment">
     <configuration name="old_main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGation" />
       <option name="ENV_FILES" value="" />
@@ -84,6 +94,24 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="hub.mediamtx: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="envFilePath" value="" />
+          <option name="services">
+            <list>
+              <option value="mediamtx" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="piSecureKit/hub/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests for irrigation.test_Irrigation.Test" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="PyGation" />
       <option name="ENV_FILES" value="" />
@@ -96,21 +124,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;irrigation.test_Irrigation.Test&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for irrigation.test_Irrigation.Test.test_pump_on_command" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="PyGation" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;irrigation.test_Irrigation.Test.test_pump_on_command&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -146,18 +159,18 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.hub.mediamtx: Compose Deployment" />
         <item itemvalue="Python.old_main" />
         <item itemvalue="Python tests.Python tests for irrigation.test_Irrigation.Test" />
         <item itemvalue="Python tests.Python tests for irrigation.test_Irrigation.Test.test_run_schedule" />
         <item itemvalue="Python tests.Python tests for irrigation.test_Irrigation.Test.test_schedule_watering" />
-        <item itemvalue="Python tests.Python tests for irrigation.test_Irrigation.Test.test_pump_on_command" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-348a24fa61fa-5312c7369657-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.23774.444" />
+        <option value="bundled-python-sdk-4c141bd692a7-e2d783800521-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26927.90" />
       </set>
     </attachedChunks>
   </component>
@@ -400,7 +413,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757474436845</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="webrtc working">
+      <option name="closed" value="true" />
+      <created>1757474911508</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1757474911508</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,7 +448,8 @@
     <MESSAGE value="Added stream to hub" />
     <MESSAGE value="Fixed camera reference" />
     <MESSAGE value="New simpler code" />
-    <option name="LAST_COMMIT_MESSAGE" value="New simpler code" />
+    <MESSAGE value="webrtc working" />
+    <option name="LAST_COMMIT_MESSAGE" value="webrtc working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

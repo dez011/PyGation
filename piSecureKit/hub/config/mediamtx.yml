@@ -1,0 +1,45 @@
+# API Configuration
+api: yes
+apiAddress: :9997
+
+# RTSP Configuration
+rtsp: yes
+rtspAddress: :8554
+rtspTransports: [tcp, udp]
+rtspsAddress: :8322
+
+# RTMP Configuration
+rtmp: yes
+rtmpAddress: :1935
+rtmpsAddress: :1936
+
+# HLS Configuration
+hls: yes
+hlsAddress: :8888
+hlsAlwaysRemux: yes
+hlsSegmentCount: 7
+hlsSegmentDuration: 1s
+hlsVariant: mpegts         # or: fmp4
+hlsAllowOrigin: "*"
+
+webrtc: yes
+webrtcAddress: :8889
+webrtcIPsFromInterfaces: yes
+webrtcAllowOrigin: "*"
+
+paths:
+  smptebars:
+      runOnInit: >
+        ffmpeg
+        -nostats
+        -re
+        -stream_loop -1
+        -i smptebars.mp4
+        -c copy
+        -f rtsp
+        rtsp://localhost:$RTSP_PORT/$MTX_PATH
+      runOnInitRestart: yes
+
+  all:
+    source: publisher
+logLevel: debug
