@@ -30,4 +30,4 @@ fi
 echo "[install] status:"
 sudo systemctl --no-pager -l status hub || true
 
-#sudo chmod +x /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh
+#sudo chmod +x /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh && /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh
