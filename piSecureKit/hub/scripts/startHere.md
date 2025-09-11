@@ -43,3 +43,12 @@ git -C /opt/PyGation pull \
   && cd /opt/PyGation/piSecureKit/hub \
   && sudo docker compose pull \
   && sudo docker compose up -d
+
+#nuke local changes
+git -C /opt/PyGation config core.filemode false \
+ && git -C /opt/PyGation fetch --prune \
+ && git -C /opt/PyGation reset --hard origin/master \
+ && git -C /opt/PyGation clean -fd \
+ && cd /opt/PyGation/piSecureKit/hub \
+ && sudo docker compose pull \
+ && sudo docker compose up -d
