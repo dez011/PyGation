@@ -1,0 +1,23 @@
+# /etc/systemd/system/piSecure.service
+[Unit]
+Description=piSecure zerov1 Camera Service
+After=network-online.target
+
+[Service]
+User=miguelh
+WorkingDirectory=/opt/PyGation/piSecureKit/cams/zerov1
+
+# Optional: pull latest before starting
+ExecStartPre=/usr/bin/git -C /opt/PyGation pull
+
+# Start your app
+ExecStart=/usr/bin/python3 /opt/PyGation/piSecureKit/cams/zerov1/main.py
+
+# Always restart on crash
+Restart=always
+RestartSec=2
+
+# Logging options:
+# 1) Send logs to the journal (recommended). Then use `journalctl -u pigation ->
+StandardOutput=append:/opt/PyGation/piSecureKit/cams/zerov1/zerov1.log
+StandardError=append:/opt/PyGation/piSecureKit/cams/zerov1/zerov1.log

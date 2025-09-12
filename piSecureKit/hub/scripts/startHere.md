@@ -35,7 +35,7 @@ sudo git clone https://github.com/dez011/PyGation.git /opt/PyGation \
 cd /opt/PyGation/piSecureKit/hub
 
 #to run the install script and copy/run the system service
-#sudo chmod +x /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh && /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh
+sudo chmod +x /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh && /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh
 
 
 update and restart docker
@@ -43,6 +43,8 @@ git -C /opt/PyGation pull \
   && cd /opt/PyGation/piSecureKit/hub \
   && sudo docker compose pull \
   && sudo docker compose up -d
+
+#or sudo systemctl restart hub instead of docker compose up -d if you installed the service
 
 #nuke local changes
 git -C /opt/PyGation config core.filemode false \
