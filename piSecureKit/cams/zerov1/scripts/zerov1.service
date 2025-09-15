@@ -22,4 +22,7 @@ RestartSec=2
 StandardOutput=append:/opt/PyGation/piSecureKit/cams/zerov1/zerov1.log
 StandardError=append:/opt/PyGation/piSecureKit/cams/zerov1/zerov1.log
 
+[Install]
+WantedBy=multi-user.target
+
 ##should see this!!!!

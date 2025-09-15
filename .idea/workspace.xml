@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="cam: fixed install deps">
-      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/deploy.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/deploy.py" afterDir="false" />
-    </list>
+    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="cam: fixed install deps" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -548,7 +546,23 @@
       <option name="project" value="LOCAL" />
       <updated>1757912440567</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="cam: fixed install deps">
+      <option name="closed" value="true" />
+      <created>1757912747379</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1757912747379</updated>
+    </task>
+    <task id="LOCAL-00047" summary="cam: fixed install deps">
+      <option name="closed" value="true" />
+      <created>1757912931433</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1757912931433</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
