@@ -1,7 +1,17 @@
-#!/usr/bin/env python3
+# python
 """
-Python port of install_hub_unit.sh with proper cwd handling.
-Replicates: clone/pull, copy unit, daemon-reload, enable, start/restart, status.
+Replacement for the former shell script `Z_DEPRECATED_install_hub_unit.sh`.
+
+This Python script fully supersedes the old installer.
+Responsibilities:
+- Clone (or pull) the `PyGation` repo into `/opt/PyGation`
+- Copy `hub.service` into `/etc/systemd/system/hub.service`
+- Run `systemctl daemon-reload`
+- Enable the `hub` service
+- Start or restart the service
+- Show status
+
+Run as a normal user (do not prefix with sudo); elevation is used only where required.
 """
 
 import os
@@ -19,7 +29,7 @@ REPO_URL = "https://github.com/dez011/PyGation.git"
 
 def run(cmd, check=True, capture=False, cwd=None):
     """Run a shell command with optional cwd."""
-    print(f"[cmd] {cmd}")
+    print(f"[run: cmd] {cmd}")
     result = subprocess.run(
         cmd,
         shell=True,
@@ -93,3 +103,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# python3 scripts/install_hub_unit.py

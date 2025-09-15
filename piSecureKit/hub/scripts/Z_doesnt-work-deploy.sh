@@ -27,5 +27,5 @@ docker image prune -f
 echo "[deploy] done."
 
 
-#sudo chmod +x /opt/PyGation/piSecureKit/hub/scripts/doesnt-work-deploy.sh
-#sudo /opt/PyGation/piSecureKit/hub/scripts/doesnt-work-deploy.sh
+#sudo chmod +x /opt/PyGation/piSecureKit/hub/scripts/Z_doesnt-work-deploy.sh
+#sudo /opt/PyGation/piSecureKit/hub/scripts/Z_doesnt-work-deploy.sh
