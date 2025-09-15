@@ -21,3 +21,5 @@ RestartSec=2
 # 1) Send logs to the journal (recommended). Then use `journalctl -u pigation ->
 StandardOutput=append:/opt/PyGation/piSecureKit/cams/zerov1/zerov1.log
 StandardError=append:/opt/PyGation/piSecureKit/cams/zerov1/zerov1.log
+
+##should see this!!!!
