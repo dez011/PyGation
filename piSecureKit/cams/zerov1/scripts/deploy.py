@@ -79,13 +79,25 @@ def validate():
 
 def install_deps(extra_args=None, require_root=True):
     """Run the dependency installer script."""
-    if not DEPS_SCRIPT.is_file():
-        raise RuntimeError(f"Missing dependency installer: {DEPS_SCRIPT}")
-    print("[install] installing dependencies...")
-    cmd = f"{'sudo ' if require_root else ''}python3 {DEPS_SCRIPT.name}"
+    script_path = (SCRIPTS_DIR / "install_deps.py").resolve()  # absolute path
+    if not script_path.is_file():
+        raise RuntimeError(f"Missing dependency installer: {script_path}")
+
+    print("[install] installing dependencies... .. .")
+
+    # only sudo if we need root AND we’re not already root
+    need_sudo = bool(require_root and os.geteuid() != 0)
+
+    parts = []
+    if need_sudo:
+        parts += ["sudo", "-n"]  # remove "-n" if you want interactive password prompts
+    parts += ["python3", str(script_path)]
     if extra_args:
-        cmd += " " + " ".join(extra_args)
-    run(cmd, cwd=SCRIPTS_DIR)
+        parts += list(extra_args)
+
+    cmd = " ".join(shlex.quote(p) for p in parts)
+    # no cwd needed anymore since we pass an absolute path
+    run(cmd)
 
 def install_unit():
     """Prefer copying zerov1.service; otherwise run the fallback installer."""
@@ -127,14 +139,12 @@ def follow_logs():
 def main():
     parser = argparse.ArgumentParser(description="Install/Update zerov1 unit.")
     parser.add_argument("--follow", action="store_true", help="Follow logs after (re)start")
-    parser.add_argument("--deps-args", nargs=argparse.REMAINDER,
-                        help="Extra args passed to dependency script (use after -- e.g. --deps-args --once --ffmpeg)")
     args = parser.parse_args()
 
     try:
         ensure_repo()
         validate()
-        install_deps(extra_args=args.deps_args) #installs nothing and does not reboot
+        install_deps()
         install_unit()
         systemd_reload_enable()
         start_or_restart()
