@@ -78,6 +78,8 @@ def validate():
         raise RuntimeError("python3 not found")
 
 def install_deps(extra_args=None, require_root=True):
+    pass
+
     """Run the dependency installer script."""
     script_path = (SCRIPTS_DIR / "install_deps.py").resolve()  # absolute path
     if not script_path.is_file():
