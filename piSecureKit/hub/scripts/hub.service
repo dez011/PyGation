@@ -15,11 +15,12 @@ ExecReload=/usr/bin/bash -lc '/opt/PyGation/piSecureKit/hub/scripts/deploy.sh'
 Restart=always
 RestartSec=2
 
+StandardOutput=append:/opt/PyGation/piSecureKit/hub/hub.log
+StandardError=append:/opt/PyGation/piSecureKit/hub/hub.log
+
 [Install]
 WantedBy=multi-user.target
 
-StandardOutput=append:/opt/PyGation/piSecureKit/hub/hub.log
-StandardError=append:/opt/PyGation/piSecureKit/hub/hub.log
 
 
 #/etc/systemd/system/hub.service
