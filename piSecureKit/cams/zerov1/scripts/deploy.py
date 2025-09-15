@@ -77,9 +77,15 @@ def validate():
     if shutil.which("python3") is None:
         raise RuntimeError("python3 not found")
 
-def install_deps():
-    print("[install] installing dependencies... .. .")
-    run("python3 install_deps.py", cwd=SCRIPTS_DIR)
+def install_deps(extra_args=None, require_root=True):
+    """Run the dependency installer script."""
+    if not DEPS_SCRIPT.is_file():
+        raise RuntimeError(f"Missing dependency installer: {DEPS_SCRIPT}")
+    print("[install] installing dependencies...")
+    cmd = f"{'sudo ' if require_root else ''}python3 {DEPS_SCRIPT.name}"
+    if extra_args:
+        cmd += " " + " ".join(extra_args)
+    run(cmd, cwd=SCRIPTS_DIR)
 
 def install_unit():
     """Prefer copying zerov1.service; otherwise run the fallback installer."""
@@ -121,12 +127,14 @@ def follow_logs():
 def main():
     parser = argparse.ArgumentParser(description="Install/Update zerov1 unit.")
     parser.add_argument("--follow", action="store_true", help="Follow logs after (re)start")
+    parser.add_argument("--deps-args", nargs=argparse.REMAINDER,
+                        help="Extra args passed to dependency script (use after -- e.g. --deps-args --once --ffmpeg)")
     args = parser.parse_args()
 
     try:
         ensure_repo()
         validate()
-        install_deps()
+        install_deps(extra_args=args.deps_args) #installs nothing and does not reboot
         install_unit()
         systemd_reload_enable()
         start_or_restart()

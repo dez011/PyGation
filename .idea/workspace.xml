@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment=".sh to py">
+    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="cam: deploy refactor no need for install_hub_unit.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/doesnt-work-bootstrap_hub.sh" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/Z_doesnt-work-bootstrap_hub.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/doesnt-work-deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/Z_doesnt-work-deploy.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/doesnt-work-hub-update" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/Z_doesnt-work-hub-update" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/install_hub_unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/install_hub_unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/install_hub_unit.sh" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/Z_DEPRECATED_install_hub_unit.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/deploy.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/deploy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/install_deps.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/install_deps.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -529,7 +526,23 @@
       <option name="project" value="LOCAL" />
       <updated>1757901819827</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="cam: deploy refactor no need for install_hub_unit.py">
+      <option name="closed" value="true" />
+      <created>1757902965109</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1757902965109</updated>
+    </task>
+    <task id="LOCAL-00044" summary="cam: deploy refactor no need for install_hub_unit.py">
+      <option name="closed" value="true" />
+      <created>1757903045137</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1757903045137</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -562,7 +575,8 @@
     <MESSAGE value="logs" />
     <MESSAGE value="hub logs and git pull" />
     <MESSAGE value=".sh to py" />
-    <option name="LAST_COMMIT_MESSAGE" value=".sh to py" />
+    <MESSAGE value="cam: deploy refactor no need for install_hub_unit.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="cam: deploy refactor no need for install_hub_unit.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
