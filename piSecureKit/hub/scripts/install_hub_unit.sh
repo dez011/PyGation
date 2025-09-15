@@ -6,6 +6,22 @@ HUB_DIR="$REPO_ROOT/piSecureKit/hub"
 UNIT_SRC="$HUB_DIR/scripts/hub.service"
 UNIT_DST="/etc/systemd/system/hub.service"
 
+REPO_URL="https://github.com/dez011/PyGation.git"
+
+# Handle git repo - clone if missing, pull if exists
+if [ ! -d "$REPO_ROOT" ]; then
+    echo "[install] cloning repo to $REPO_ROOT"
+    sudo git clone "$REPO_URL" "$REPO_ROOT"
+    sudo chown -R $USER:$USER "$REPO_ROOT"
+elif [ -d "$REPO_ROOT/.git" ]; then
+    echo "[install] pulling latest changes"
+    cd "$REPO_ROOT"
+    git pull origin master
+else
+    echo "ERR: $REPO_ROOT exists but is not a git repo"
+    exit 1
+fi
+
 # sanity checks
 [ -f "$UNIT_SRC" ] || { echo "ERR: missing $UNIT_SRC"; exit 1; }
 command -v docker >/dev/null || { echo "ERR: docker not found"; exit 1; }
@@ -31,3 +47,4 @@ echo "[install] status:"
 sudo systemctl --no-pager -l status hub || true
 
 #sudo chmod +x /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh && /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh
+# sudo /opt/PyGation/piSecureKit/hub/scripts/install_hub_unit.sh

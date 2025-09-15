@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="cam scripts migrated to python">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/hub.service" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/hub.service" afterDir="false" />
+    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="logs">
+      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/install_hub_unit.sh" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/install_hub_unit.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -469,7 +468,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757712042328</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="logs">
+      <option name="closed" value="true" />
+      <created>1757899362736</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1757899362736</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -499,7 +506,8 @@
     <MESSAGE value="webrtc working" />
     <MESSAGE value="Added hub dir and scripts/configs" />
     <MESSAGE value="cam scripts migrated to python" />
-    <option name="LAST_COMMIT_MESSAGE" value="cam scripts migrated to python" />
+    <MESSAGE value="logs" />
+    <option name="LAST_COMMIT_MESSAGE" value="logs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
