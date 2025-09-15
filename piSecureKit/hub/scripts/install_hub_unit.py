@@ -19,6 +19,7 @@ REPO_URL = "https://github.com/dez011/PyGation.git"
 
 def run(cmd, check=True, capture=False, cwd=None):
     """Run a shell command with optional cwd."""
+    print(f"[cmd] {cmd}")
     result = subprocess.run(
         cmd,
         shell=True,

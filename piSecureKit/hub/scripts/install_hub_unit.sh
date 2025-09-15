@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#DEPRECATED#
 set -euo pipefail
 
 REPO_ROOT="/opt/PyGation"

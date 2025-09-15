@@ -29,6 +29,3 @@ WantedBy=multi-user.target
 #enable + start
 #sudo systemctl daemon-reload
 #sudo systemctl enable --now hub
-
-
-#################################
