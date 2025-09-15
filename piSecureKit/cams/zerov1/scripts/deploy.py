@@ -95,7 +95,8 @@ def install_deps(extra_args=None, require_root=True):
     if extra_args:
         parts += list(extra_args)
 
-    cmd = " ".join(shlex.quote(p) for p in parts)
+    cmd = " " #.join(shlex.quote(p) for p in parts)
+    # cmd = " ".join(shlex.quote(p) for p in parts)
     # no cwd needed anymore since we pass an absolute path
     run(cmd)
 
