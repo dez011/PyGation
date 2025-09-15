@@ -18,6 +18,9 @@ RestartSec=2
 [Install]
 WantedBy=multi-user.target
 
+StandardOutput=append:/opt/PyGation/piSecureKit/hub/hub.log
+StandardError=append:/opt/PyGation/piSecureKit/hub/hub.log
+
 
 #/etc/systemd/system/hub.service
 #Optional: systemd unit (start on boot, easy reload)
