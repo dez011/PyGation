@@ -14,8 +14,8 @@ ExecStartPre=/usr/bin/git -C /opt/PyGation pull
 ExecStart=/usr/bin/python3 /opt/PyGation/piSecureKit/cams/zerov1/main.py
 
 # Always restart on crash causes issues when something tries to grab the cam.
-Restart=always
-RestartSec=2
+#Restart=always
+#RestartSec=2
 
 # Logging options:
 # 1) Send logs to the journal (recommended). Then use `journalctl -u pigation ->

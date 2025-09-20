@@ -171,3 +171,4 @@ if __name__ == "__main__":
     main()
 
 # to run: python3 install_zerov1_unit.py --follow
+##updated run: python3 scripts/deploy.py
