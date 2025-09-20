@@ -38,9 +38,9 @@ PASS = "mypass"
 picam2 = Picamera2()
 frame_rate = 30
 # max resolution is (3280, 2464) for full FoV at 15FPS
-video_config = picam2.create_video_configuration(main={"size": (1640, 1232), "format": "RGB888"},
+video_config = picam2.create_video_configuration(main={"size": (640, 480), "format": "YUV420"},
                                                  lores={"size": (640, 480), "format": "YUV420"},
-                                                 controls={'FrameRate': frame_rate})
+                                                 controls={'FrameRate': frame_rate}, buffer_count=2)
 video_config2 = picam2.create_video_configuration(
     main={"size": (1280, 720), "format": "YUV420"},  # compact, encoder-friendly
     lores=None,         # <- turn OFF extra lores stream
