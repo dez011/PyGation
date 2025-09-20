@@ -78,7 +78,7 @@ try:
     # picam2.start_recording(encoder_HQ, HQoutput, quality=Quality.LOW)
     # picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW)
     # picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW, name="lores")
-    picam2.start_recording(encoder_LQ, LQoutput, name="lores")
+    picam2.start_recording(encoder_LQ, HQoutput, name="lores")
     print("Started camera streams")
     while True:
         time.sleep(5)
