@@ -62,10 +62,9 @@ HQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}
 LQoutput = FfmpegOutput(
     f"-fflags +genpts -use_wallclock_as_timestamps 1 "
     f"-rtsp_transport tcp -muxdelay 0 -muxpreload 0 "
-    f"-c:v copy -an -f rtsp rtsp://{USER}:{PASS}@{HUB}:8554/lqstream",
+    f"-c:v copy -an -f rtsp rtsp://{HUB}:8554/lqstream",
     audio=False
 )
-
 # LQoutput = FfmpegOutput("-f rtsp -rtsp_transport tcp rtsp://192.168.6.76:8554/lqstream", audio=False)
 
 # Encoder settings
