@@ -7,7 +7,7 @@
     <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="cam: removed restart always from service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/piSecureKit/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/Readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/install_deps.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/install_deps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,14 +203,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743179594493</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Added pi project and refactored directories">
-      <option name="closed" value="true" />
-      <created>1756951095520</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1756951095520</updated>
     </task>
     <task id="LOCAL-00006" summary="Added pi stream main file">
       <option name="closed" value="true" />
@@ -594,7 +586,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758405737992</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="cam: removed restart always from service">
+      <option name="closed" value="true" />
+      <created>1758408539302</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1758408539302</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

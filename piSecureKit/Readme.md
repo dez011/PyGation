@@ -14,6 +14,28 @@ Then do
 
 _#updated run: python3 scripts/deploy.py_
 
+# 1) Install the modern camera stack
+sudo apt update
+sudo apt install -y rpicam-apps python3-picamera2 v4l-utils
+
+# 2) (Pi Zero + Cam Module 3) give the ISP memory + steady clocks
+#   (skip if you already set CMA; harmless if duplicated)
+sudo sed -i 's/\bcma=\S*/cma=192M/' /boot/firmware/cmdline.txt || \
+  sudo sed -i 's/$/ cma=192M/' /boot/firmware/cmdline.txt
+echo 'core_freq_min=250' | sudo tee -a /boot/firmware/config.txt
+
+# 3) (If you’re using Cam Module 3 / IMX708) force the overlay
+#    change to ov5647 (V1), imx219 (V2), imx477 (HQ) if that’s your sensor
+echo 'dtoverlay=imx708' | sudo tee -a /boot/firmware/config.txt
+
+# 4) Reboot to load everything
+sudo reboot
+
+# Should exist now; this is the new name
+rpicam-hello --list-cameras
+rpicam-hello -t 2000
+
+
 sudo reboot
 
 
