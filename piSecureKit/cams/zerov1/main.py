@@ -16,7 +16,7 @@ from threading import Condition
 
 # Third-party imports
 from flask import Flask, render_template, Response
-from flask_restful import Resource, Api
+# from flask_restful import Resource, Api
 
 # Camera-specific imports
 try:

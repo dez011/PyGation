@@ -2,6 +2,33 @@ sudo git clone https://github.com/dez011/PyGation.git /opt/PyGation
 sudo chown -R "$USER":"$USER" /opt/PyGation
 
 
+sudo python3 piSecureKit/cams/zerov1/scripts/install_deps.py --p7zip --ffmpeg --python --camera --openblas --pip picamera2 Flask Flask-RESTful Pillow watchdog bcrypt
+ 
+ $ sudo nano /boot/firmware/config.txt
+Add your required tags to enable your camera. The CM4-Nano-C requires what's below. If you only need to enable camera autodetect, then disregard this step. If you need to add other code instead of what's required for the CM4-Nano-C, then replace your code where the CM4-Nano-C code should go.
+
+camera_auto_detect=0
+Place this under [all]
+dtoverlay=imx219,cam0
+Then do
+
+_#updated run: python3 scripts/deploy.py_
+
+sudo reboot
+
+
+
+sudo LIBCAMERA_LOG_LEVELS=*:DEBUG \
+rpicam-vid -t 0 -n --width 1280 --height 720 --framerate 30 \
+  --bitrate 2000000 --intra 60 --profile baseline --inline \
+  -o /dev/null |& tee /tmp/cam.log
+
+tail -n 60 /tmp/cam.log
+
+
+
+
+
 to pull and restart piSecure service
 git -C /opt/PyGation pull && sudo systemctl daemon-reload && sudo systemctl restart piSecure && systemctl status --no-pager -l piSecure
 

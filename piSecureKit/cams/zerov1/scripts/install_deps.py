@@ -125,6 +125,9 @@ if __name__ == "__main__":
         sys.exit(1)
 
 
+'''
+sudo python3 piSecureKit/cams/zerov1/scripts/install_deps.py --p7zip --ffmpeg --python --camera --openblas --pip picamera2 Flask Flask-RESTful Pillow watchdog bcrypt
+'''
 
 
 # import subprocess

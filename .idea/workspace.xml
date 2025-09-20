@@ -6,14 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="cam: removed restart always from service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/deploy.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/deploy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/old/deploy.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/dry_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/old/dry_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/test_deployment.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/old/test_deployment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/Z_DEPRECATED_install_hub_unit.sh" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/old/Z_DEPRECATED_install_hub_unit.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/Z_doesnt-work-bootstrap_hub.sh" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/old/Z_doesnt-work-bootstrap_hub.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/Z_doesnt-work-deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/old/Z_doesnt-work-deploy.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/hub/scripts/Z_doesnt-work-hub-update" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/hub/scripts/old/Z_doesnt-work-hub-update" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/piSecureKit/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/install_deps.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts/install_deps.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +30,12 @@
     &quot;assignee&quot;: &quot;dez011&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/dez011/PyGation.git&quot;,
-    &quot;accountId&quot;: &quot;7e53ff20-b4bd-48be-aafd-69a40222dcf1&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/dez011/PyGation.git",
+    "accountId": "a71b992c-e8a3-4678-b946-cbd41b575201"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -50,29 +44,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.hub.mediamtx: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_control_pump.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_pump_off_command.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_pump_on_command.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_run_schedule.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_Irrigation.Test.test_schedule_watering.executor&quot;: &quot;Debug&quot;,
-    &quot;Python tests.Python tests in test_Irrigation.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Irrigation.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dry_run.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHELLCHECK.PATH&quot;: &quot;/Users/miguelh/Library/Application Support/JetBrains/PyCharmCE2025.1/plugins/Shell Script/shellcheck&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/miguelh/Documents/GitHub/PyGation/piSecureKit/cams/zerov1/scripts&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vcs.patch.path&quot;: &quot;/Users/miguelh/Downloads&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.hub.mediamtx: Compose Deployment.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for test_Irrigation.Test.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_control_pump.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_pump_off_command.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_pump_on_command.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_run_schedule.executor": "Run",
+    "Python tests.Python tests for test_Irrigation.Test.test_schedule_watering.executor": "Debug",
+    "Python tests.Python tests in test_Irrigation.py.executor": "Run",
+    "Python.Irrigation.executor": "Run",
+    "Python.dry_run.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHELLCHECK.PATH": "/Users/miguelh/Library/Application Support/JetBrains/PyCharmCE2025.1/plugins/Shell Script/shellcheck",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/miguelh/Documents/GitHub/PyGation/piSecureKit/cams/zerov1/scripts",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vcs.patch.path": "/Users/miguelh/Downloads"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/piSecureKit/cams/zerov1/scripts" />
@@ -197,7 +191,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-4c141bd692a7-e2d783800521-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26927.90" />
+        <option value="bundled-python-sdk-ce6832f46686-7b97d883f26b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.25557.178" />
       </set>
     </attachedChunks>
   </component>
@@ -209,14 +203,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743179594493</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Added config file">
-      <option name="closed" value="true" />
-      <created>1743692688831</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1743692688831</updated>
     </task>
     <task id="LOCAL-00005" summary="Added pi project and refactored directories">
       <option name="closed" value="true" />
@@ -600,7 +586,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757968831299</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="cam: removed restart always from service">
+      <option name="closed" value="true" />
+      <created>1758405737992</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1758405737992</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
