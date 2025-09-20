@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="cam: removed restart always from service">
-      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="cam: removed restart always from service" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,6 +44,8 @@
   "keyToString": {
     "Docker.hub.mediamtx: Compose Deployment.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Notification.DisplayName-DoNotAsk-git.push.result": "",
+    "Notification.DoNotAsk-git.push.result": "true",
     "Python tests.Python tests for test_Irrigation.Test.executor": "Run",
     "Python tests.Python tests for test_Irrigation.Test.test_control_pump.executor": "Run",
     "Python tests.Python tests for test_Irrigation.Test.test_pump_off_command.executor": "Run",
@@ -201,38 +201,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743179594493</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Added forward slash to route">
-      <option name="closed" value="true" />
-      <created>1756953381727</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1756953381727</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Added forward slash to route">
-      <option name="closed" value="true" />
-      <created>1756954542577</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1756954542577</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Fixed for picamera2">
-      <option name="closed" value="true" />
-      <created>1756954708199</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1756954708199</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Fixed for picamera2">
-      <option name="closed" value="true" />
-      <created>1756955117855</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1756955117855</updated>
     </task>
     <task id="LOCAL-00011" summary="Fixed for picamera2">
       <option name="closed" value="true" />
@@ -592,7 +560,39 @@
       <option name="project" value="LOCAL" />
       <updated>1758409322850</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="cam: removed restart always from service">
+      <option name="closed" value="true" />
+      <created>1758409380071</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1758409380071</updated>
+    </task>
+    <task id="LOCAL-00057" summary="cam: removed restart always from service">
+      <option name="closed" value="true" />
+      <created>1758409574145</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1758409574145</updated>
+    </task>
+    <task id="LOCAL-00058" summary="cam: removed restart always from service">
+      <option name="closed" value="true" />
+      <created>1758409619461</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1758409619461</updated>
+    </task>
+    <task id="LOCAL-00059" summary="cam: removed restart always from service">
+      <option name="closed" value="true" />
+      <created>1758409731594</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1758409731594</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
