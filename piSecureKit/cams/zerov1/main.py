@@ -72,7 +72,7 @@ LQoutput = FfmpegOutput(
 encoder_HQ = H264Encoder(bitrate=4_000_000, repeat=True, iperiod=30)
 # encoder_LQ = H264Encoder(repeat=True, iperiod=30, framerate=frame_rate, enable_sps_framerate=True)
 # Encoder settings (replace your encoder_LQ line)
-encoder_LQ = H264Encoder(bitrate=2_000_000, repeat=True, intra_period=60)
+encoder_LQ = H264Encoder(bitrate=2_000_000, repeat=True, iperiod=60)
 
 try:
     print("trying to start camera streams")
