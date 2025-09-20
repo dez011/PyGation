@@ -92,13 +92,24 @@ def install_deps(extra_args=None, require_root=True):
     if need_sudo:
         parts += ["sudo", "-n"]  # remove "-n" if you want interactive password prompts
     parts += ["python3", str(script_path)]
+
     if extra_args:
         parts += list(extra_args)
 
-    cmd = " " #.join(shlex.quote(p) for p in parts)
+    cmd = " ".join(str(p) for p in parts)
     # cmd = " ".join(shlex.quote(p) for p in parts)
     # no cwd needed anymore since we pass an absolute path
     run(cmd)
+
+    '''
+        # To install all supported dependencies
+        install_deps(extra_args=[
+            "--p7zip", "--ffmpeg", "--python", "--camera", "--openblas",
+            "--pip", "picamera2", "Flask", "Flask-RESTful", "Pillow", "watchdog", "bcrypt"
+        ])
+        
+        add --reboot to reboot after install
+    '''
 
 def install_unit():
     """Prefer copying zerov1.service; otherwise run the fallback installer."""
@@ -107,8 +118,8 @@ def install_unit():
         run(f"sudo install -o root -g root -m 0644 {UNIT_SRC} {UNIT_DST}")
     else:
         print(f"[install] unit file not found; using fallback: {FALLBACK_SH}")
-        run(f"chmod +x {FALLBACK_SH}")
-        run(f"sudo {FALLBACK_SH}")
+        # run(f"chmod +x {FALLBACK_SH}")
+        # run(f"sudo {FALLBACK_SH}")
 
 def systemd_reload_enable():
     print("[install] systemd daemon-reload")
