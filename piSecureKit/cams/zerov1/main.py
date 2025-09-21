@@ -50,7 +50,7 @@ video_config2 = picam2.create_video_configuration(
 )
 
 picam2.align_configuration(video_config)
-picam2.configure(video_config)
+picam2.configure(video_config2)
 
 # FFMPEG output config
 # HQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/hqstream", audio=False)
@@ -60,7 +60,14 @@ picam2.configure(video_config)
 # LQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}:8554/lqstream", audio=False)
 
 #worksv
-HQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}:8554/hqstream", audio=True)
+# HQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}:8554/hqstream", audio=True)
+# Fixed HQoutput - removed -c:v copy and fixed audio mismatch
+HQoutput = FfmpegOutput(
+    f"-fflags +genpts -use_wallclock_as_timestamps 1 "
+    f"-rtsp_transport tcp -muxdelay 0 -muxpreload 0 "
+    f"-f rtsp rtsp://{HUB}:8554/hqstream",
+    audio=False  # Changed to match -an flag
+)
 # LQoutput = FfmpegOutput(
 #     f"-fflags +genpts -use_wallclock_as_timestamps 1 "
 #     f"-rtsp_transport tcp -muxdelay 0 -muxpreload 0 "
