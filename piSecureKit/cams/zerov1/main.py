@@ -57,14 +57,16 @@ picam2.configure(video_config)
 # LQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/lqstream", audio=False)
 
 # HQoutput = FfmpegOutput("-f rtsp -rtsp_transport tcp rtsp://192.168.6.76:8554/hqstream", audio=False)
-HQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}:8554/hqstream", audio=True)
 # LQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}:8554/lqstream", audio=False)
-LQoutput = FfmpegOutput(
-    f"-fflags +genpts -use_wallclock_as_timestamps 1 "
-    f"-rtsp_transport tcp -muxdelay 0 -muxpreload 0 "
-    f"-c:v copy -an -f rtsp rtsp://{HUB}:8554/lqstream",
-    audio=False
-)
+
+#worksv
+HQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}:8554/hqstream", audio=True)
+# LQoutput = FfmpegOutput(
+#     f"-fflags +genpts -use_wallclock_as_timestamps 1 "
+#     f"-rtsp_transport tcp -muxdelay 0 -muxpreload 0 "
+#     f"-c:v copy -an -f rtsp rtsp://{HUB}:8554/lqstream",
+#     audio=False
+# )
 # LQoutput = FfmpegOutput("-f rtsp -rtsp_transport tcp rtsp://192.168.6.76:8554/lqstream", audio=False)
 
 # Encoder settings
@@ -78,8 +80,9 @@ try:
     # picam2.start_recording(encoder_HQ, HQoutput, quality=Quality.LOW)
     # picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW)
     # picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW, name="lores")
+    #works
     # picam2.start_recording(encoder_LQ, HQoutput, name="lores")
-    picam2.start_recording(encoder_HQ, HQoutput, name="lores")
+    picam2.start_recording(encoder_HQ, HQoutput)
     print("Started camera streams")
     while True:
         time.sleep(5)
