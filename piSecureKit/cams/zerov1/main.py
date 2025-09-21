@@ -1,298 +1,94 @@
 #!/usr/bin/env python3
 """
-PiSecureKit - Raspberry Pi Camera Security System (OOP + type-safe refactor)
+PiSecureKit - Raspberry Pi Camera Security System
 """
-from __future__ import annotations
 
+# Standard library imports
+import io
 import os
 import time
-import signal
 import logging
-from dataclasses import dataclass
-from pathlib import Path
-from typing import Protocol, Optional, runtime_checkable
+import subprocess
+import threading
+import atexit
+from datetime import datetime
+from threading import Condition
 
-# ---------- Logging ----------
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-)
-LOG = logging.getLogger("PiSecureKit")
+# Third-party imports
+from flask import Flask, render_template, Response
+# from flask_restful import Resource, Api
 
-# ---------- Optional camera imports ----------
-CAMERA_AVAILABLE = True
+# Camera-specific imports
 try:
+    import picamera2
     from picamera2 import Picamera2
-    from picamera2.encoders import H264Encoder, Quality
-    from picamera2.outputs import FfmpegOutput
-except Exception as _exc:  # pragma: no cover (dev machines)
-    LOG.warning("Camera modules not available: %s", _exc)
+    from picamera2.encoders import H264Encoder, MJPEGEncoder, Quality
+    from picamera2.outputs import FileOutput, CircularOutput, FfmpegOutput
+    from libcamera import Transform
+    CAMERA_AVAILABLE = True
+except ImportError:
+    logging.warning("Camera modules not available. Camera functionality will be disabled.")
     CAMERA_AVAILABLE = False
 
-
-# ---------- Configuration ----------
-@dataclass(frozen=True)
-class RtspConfig:
-    host: str                # e.g., "192.168.6.76"
-    port: int = 8554
-    path: str = "hqstream"
-    tcp: bool = True
-
-    def url(self) -> str:
-        # rtsp://HOST:PORT/PATH
-        return f"rtsp://{self.host}:{self.port}/{self.path}"
-
-    def ffmpeg_flags(self) -> str:
-        # Keep it explicit & easy to tweak
-        base = "-f rtsp"
-        if self.tcp:
-            base += " -rtsp_transport tcp"
-        # copy the encoded video stream, drop audio
-        return f"-c:v copy -an {base}"
+HUB = "192.168.6.76"        # <-- Pi5 hub IP (not localhost)
+USER = "myuser"
+PASS = "mypass"
 
 
-@dataclass(frozen=True)
-class VideoConfig:
-    # Picamera2 main and lores stream sizes & formats
-    width: int = 1640
-    height: int = 1232
-    format: str = "YUV420"
-    frame_rate: int = 30
-    bitrate: int = 4_000_000
-    iperiod: int = 30  # keyframe interval
-    lores_enabled: bool = False
-    lores_width: int = 640
-    lores_height: int = 480
+picam2 = Picamera2()
+frame_rate = 30
+# max resolution is (3280, 2464) for full FoV at 15FPS
+video_config = picam2.create_video_configuration(main={"size": (640, 480), "format": "YUV420"},
+                                                 lores={"size": (640, 480), "format": "YUV420"},
+                                                 controls={'FrameRate': frame_rate}, buffer_count=2)
+video_config2 = picam2.create_video_configuration(
+    main={"size": (1280, 720), "format": "YUV420"},  # compact, encoder-friendly
+    lores=None,         # <- turn OFF extra lores stream
+    raw=None,           # <- turn OFF RAW stream (huge CMA hit)
+    controls={"FrameRate": 30},
+    buffer_count=3      # <- fewer DMA buffers = less CMA
+)
 
+picam2.align_configuration(video_config)
+picam2.configure(video_config)
 
-@dataclass(frozen=True)
-class AppConfig:
-    rtsp: RtspConfig
-    video: VideoConfig = VideoConfig()
-    preview_jpeg_path: Path = Path("/dev/shm/camera-tmp.jpg")
-    preview_interval_sec: float = 5.0
+# FFMPEG output config
+# HQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/hqstream", audio=False)
+# LQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/lqstream", audio=False)
 
+# HQoutput = FfmpegOutput("-f rtsp -rtsp_transport tcp rtsp://192.168.6.76:8554/hqstream", audio=False)
+HQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}:8554/hqstream", audio=False)
+# LQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}:8554/lqstream", audio=False)
+LQoutput = FfmpegOutput(
+    f"-fflags +genpts -use_wallclock_as_timestamps 1 "
+    f"-rtsp_transport tcp -muxdelay 0 -muxpreload 0 "
+    f"-c:v copy -an -f rtsp rtsp://{HUB}:8554/lqstream",
+    audio=False
+)
+# LQoutput = FfmpegOutput("-f rtsp -rtsp_transport tcp rtsp://192.168.6.76:8554/lqstream", audio=False)
 
-# ---------- Camera Abstraction ----------
-@runtime_checkable
-class CameraDriver(Protocol):
-    """Protocol for concrete camera drivers (real or mock)."""
+# Encoder settings
+encoder_HQ = H264Encoder(bitrate=4_000_000, repeat=True, iperiod=30)
+# encoder_LQ = H264Encoder(repeat=True, iperiod=30, framerate=frame_rate, enable_sps_framerate=True)
+# Encoder settings (replace your encoder_LQ line)
+encoder_LQ = H264Encoder(bitrate=2_000_000, repeat=True, iperiod=60)
 
-    def start(self) -> None: ...
-    def stop(self) -> None: ...
-    def capture_still(self, destination: Path) -> None: ...
-
-
-class NullCamera(CameraDriver):
-    """Dev-machine fallback that simulates work without hardware."""
-    def __init__(self, fps: int = 30) -> None:
-        self._running = False
-        self._fps = fps
-
-    def start(self) -> None:
-        LOG.info("[NullCamera] start (simulating %s FPS stream)", self._fps)
-        self._running = True
-
-    def stop(self) -> None:
-        if self._running:
-            LOG.info("[NullCamera] stop")
-            self._running = False
-
-    def capture_still(self, destination: Path) -> None:
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        # Write a tiny placeholder file
-        destination.write_bytes(b"\xFF\xD8\xFF\xD9")  # minimal JPEG SOI/EOI
-        LOG.debug("[NullCamera] wrote placeholder still to %s", destination)
-
-
-class Picamera2Driver(CameraDriver):
-    """Real Picamera2-backed implementation."""
-    def __init__(self, cfg: AppConfig) -> None:
-        if not CAMERA_AVAILABLE:
-            raise RuntimeError("Picamera2 not available on this system.")
-        self._cfg = cfg
-        self._picam2 = Picamera2()
-        self._encoder = H264Encoder(
-            bitrate=self._cfg.video.bitrate,
-            repeat=True,
-            iperiod=self._cfg.video.iperiod
-        )
-        self._output = FfmpegOutput(
-            f"{self._cfg.rtsp.ffmpeg_flags()} {self._cfg.rtsp.url()}",
-            audio=False
-        )
-        self._started = False
-
-        # Attempt a series of increasingly lighter configurations to avoid DMA/CMA OOM
-        attempts = [
-            # (width, height, pixel_format, buffer_count, use_lores)
-            (self._cfg.video.width, self._cfg.video.height, self._cfg.video.format, 3, self._cfg.video.lores_enabled),
-            (1280, 720,       "YUV420", 3, False),
-            (1280, 720,       "YUV420", 2, False),
-            (1024, 576,       "YUV420", 2, False),
-            (640,  480,       "YUV420", 2, False),
-        ]
-
-        configured = False
-        for (w, h, fmt, buffers, use_lores) in attempts:
-            if self._try_configure(w, h, fmt, buffers, use_lores):
-                LOG.info("Configured camera: %dx%d %s (buffers=%d, lores=%s)", w, h, fmt, buffers, use_lores)
-                configured = True
-                break
-
-        if not configured:
-            raise RuntimeError("Failed to configure Picamera2 after multiple attempts; likely CMA/DMA memory is insufficient.")
-
-    def _try_configure(self, main_w: int, main_h: int, main_fmt: str, buffer_count: int, use_lores: bool) -> bool:
-        try:
-            kwargs = {
-                "main": {"size": (main_w, main_h), "format": main_fmt},
-                "controls": {"FrameRate": self._cfg.video.frame_rate},
-            }
-            if use_lores:
-                kwargs["lores"] = {"size": (self._cfg.video.lores_width, self._cfg.video.lores_height), "format": "YUV420"}
-            video_conf = self._picam2.create_video_configuration(**kwargs)
-            video_conf["buffer_count"] = buffer_count
-            self._picam2.align_configuration(video_conf)
-            self._picam2.configure(video_conf)
-            return True
-        except Exception as e:
-            LOG.warning("Configure attempt failed for %dx%d %s (buffers=%d, lores=%s): %s", main_w, main_h, main_fmt, buffer_count, use_lores, e)
-            return False
-
-    def start(self) -> None:
-        if self._started:
-            return
-        LOG.info("Starting Picamera2 RTSP to %s", self._cfg.rtsp.url())
-        # Quality.LOW here reduces encoder load for stability; adjust if desired
-        self._picam2.start_recording(self._encoder, self._output, quality=Quality.LOW)
-        self._started = True
-
-    def stop(self) -> None:
-        if not self._started:
-            return
-        LOG.info("Stopping Picamera2")
-        try:
-            self._picam2.stop_recording()
-        finally:
-            self._started = False
-
-    def capture_still(self, destination: Path) -> None:
-        req = self._picam2.capture_request()
-        try:
-            req.save("main", str(destination))
-        finally:
-            req.release()
-
-
-# ---------- Orchestration ----------
-class StreamService:
-    """
-    Owns a CameraDriver lifecycle and optional periodic preview capture.
-    Use as a context manager for guaranteed cleanup.
-    """
-    def __init__(self, camera: CameraDriver, cfg: AppConfig) -> None:
-        self._camera = camera
-        self._cfg = cfg
-        self._running = False
-
-    def __enter__(self) -> "StreamService":
-        self.start()
-        return self
-
-    def __exit__(self, exc_type, exc, tb) -> None:
-        self.stop()
-
-    def start(self) -> None:
-        if self._running:
-            return
-        self._camera.start()
-        self._running = True
-
-    def stop(self) -> None:
-        if not self._running:
-            return
-        self._camera.stop()
-        self._running = False
-
-    def run_forever(self) -> None:
-        """
-        Blocks; periodically captures a still for preview.
-        Use SIGINT/SIGTERM to stop.
-        """
-        LOG.info("StreamService running; preview every %.1fs -> %s",
-                 self._cfg.preview_interval_sec, self._cfg.preview_jpeg_path)
-
-        next_tick = time.monotonic()
-        try:
-            while self._running:
-                now = time.monotonic()
-                if now >= next_tick:
-                    try:
-                        self._camera.capture_still(self._cfg.preview_jpeg_path)
-                    except Exception as e:
-                        LOG.exception("Still capture failed: %s", e)
-                    next_tick = now + self._cfg.preview_interval_sec
-                time.sleep(0.05)  # small sleep to avoid tight loop
-        finally:
-            LOG.info("StreamService loop exiting")
-
-
-# ---------- Wiring / Bootstrap ----------
-def build_camera(cfg: AppConfig) -> CameraDriver:
-    if CAMERA_AVAILABLE:
-        return Picamera2Driver(cfg)
-    LOG.warning("Using NullCamera (no hardware).")
-    return NullCamera(fps=cfg.video.frame_rate)
-
-
-def install_signal_handlers(stop_cb) -> None:
-    def _handler(signum, _frame):
-        LOG.info("Received signal %s, shutting down...", signum)
-        stop_cb()
-
-    for s in (signal.SIGINT, signal.SIGTERM):
-        try:
-            signal.signal(s, _handler)
-        except Exception:
-            # Not all platforms allow setting these (e.g., certain threads)
-            pass
-
-
-def main() -> int:
-    # Read host from env or default to your original
-    hub_host = os.getenv("PISECUREKIT_HUB", "192.168.6.76")
-
-    cfg = AppConfig(
-        rtsp=RtspConfig(host=hub_host, port=8554, path="hqstream"),
-        video=VideoConfig(
-            width=1640, height=1232, format="YUV420",
-            frame_rate=30, bitrate=4_000_000, iperiod=30,
-            lores_enabled=False,
-            lores_width=640,
-            lores_height=480,
-        ),
-        preview_jpeg_path=Path("/dev/shm/camera-tmp.jpg"),
-        preview_interval_sec=5.0
-    )
-
-    camera = build_camera(cfg)
-    service = StreamService(camera, cfg)
-
-    # graceful shutdown
-    install_signal_handlers(service.stop)
-
-    LOG.info("Starting camera streams…")
-    with service:
-        # block here until signal or exception
-        service.run_forever()
-    LOG.info("Camera streams stopped.")
-    return 0
-
-
-if __name__ == "__main__":
-    try:
-        raise SystemExit(main())
-    except Exception as e:
-        LOG.exception("Fatal error: %s", e)
-        raise
+try:
+    print("trying to start camera streams")
+    # picam2.start_recording(encoder_HQ, HQoutput, quality=Quality.LOW)
+    # picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW)
+    # picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW, name="lores")
+    picam2.start_recording(encoder_LQ, HQoutput, name="lores")
+    print("Started camera streams")
+    while True:
+        time.sleep(5)
+        still = picam2.capture_request()
+        still.save("main", "/dev/shm/camera-tmp.jpg")
+        # still.save("main", "/home/allzero22/Webserver/webcam/static/pictures/camera-tmp.jpg")
+        # os.rename('/home/allzero22/Webserver/webcam/static/pictures/camera-tmp.jpg',
+        #           '/home/allzero22/Webserver/webcam/static/pictures/camera.jpg')
+        still.release()
+        # os.rename('/dev/shm/camera-tmp.jpg', '/dev/shm/camera.jpg') # make image replacement atomic operation
+except Exception as e:
+    print("exiting picamera2 streamer due to exception:", e)
+    picam2.stop_recording()
