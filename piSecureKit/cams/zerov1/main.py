@@ -56,10 +56,13 @@ class VideoConfig:
     # Picamera2 main and lores stream sizes & formats
     width: int = 1640
     height: int = 1232
-    format: str = "RGB888"
+    format: str = "YUV420"
     frame_rate: int = 30
     bitrate: int = 4_000_000
     iperiod: int = 30  # keyframe interval
+    lores_enabled: bool = False
+    lores_width: int = 640
+    lores_height: int = 480
 
 
 @dataclass(frozen=True)
@@ -120,15 +123,42 @@ class Picamera2Driver(CameraDriver):
         )
         self._started = False
 
-        # Build video configuration
-        video_conf = self._picam2.create_video_configuration(
-            main={"size": (cfg.video.width, cfg.video.height),
-                  "format": cfg.video.format},
-            lores={"size": (640, 480), "format": "YUV420"},
-            controls={'FrameRate': cfg.video.frame_rate},
-        )
-        self._picam2.align_configuration(video_conf)
-        self._picam2.configure(video_conf)
+        # Attempt a series of increasingly lighter configurations to avoid DMA/CMA OOM
+        attempts = [
+            # (width, height, pixel_format, buffer_count, use_lores)
+            (self._cfg.video.width, self._cfg.video.height, self._cfg.video.format, 3, self._cfg.video.lores_enabled),
+            (1280, 720,       "YUV420", 3, False),
+            (1280, 720,       "YUV420", 2, False),
+            (1024, 576,       "YUV420", 2, False),
+            (640,  480,       "YUV420", 2, False),
+        ]
+
+        configured = False
+        for (w, h, fmt, buffers, use_lores) in attempts:
+            if self._try_configure(w, h, fmt, buffers, use_lores):
+                LOG.info("Configured camera: %dx%d %s (buffers=%d, lores=%s)", w, h, fmt, buffers, use_lores)
+                configured = True
+                break
+
+        if not configured:
+            raise RuntimeError("Failed to configure Picamera2 after multiple attempts; likely CMA/DMA memory is insufficient.")
+
+    def _try_configure(self, main_w: int, main_h: int, main_fmt: str, buffer_count: int, use_lores: bool) -> bool:
+        try:
+            kwargs = {
+                "main": {"size": (main_w, main_h), "format": main_fmt},
+                "controls": {"FrameRate": self._cfg.video.frame_rate},
+            }
+            if use_lores:
+                kwargs["lores"] = {"size": (self._cfg.video.lores_width, self._cfg.video.lores_height), "format": "YUV420"}
+            video_conf = self._picam2.create_video_configuration(**kwargs)
+            video_conf["buffer_count"] = buffer_count
+            self._picam2.align_configuration(video_conf)
+            self._picam2.configure(video_conf)
+            return True
+        except Exception as e:
+            LOG.warning("Configure attempt failed for %dx%d %s (buffers=%d, lores=%s): %s", main_w, main_h, main_fmt, buffer_count, use_lores, e)
+            return False
 
     def start(self) -> None:
         if self._started:
@@ -236,8 +266,11 @@ def main() -> int:
     cfg = AppConfig(
         rtsp=RtspConfig(host=hub_host, port=8554, path="hqstream"),
         video=VideoConfig(
-            width=1640, height=1232, format="RGB888",
-            frame_rate=30, bitrate=4_000_000, iperiod=30
+            width=1640, height=1232, format="YUV420",
+            frame_rate=30, bitrate=4_000_000, iperiod=30,
+            lores_enabled=False,
+            lores_width=640,
+            lores_height=480,
         ),
         preview_jpeg_path=Path("/dev/shm/camera-tmp.jpg"),
         preview_interval_sec=5.0
