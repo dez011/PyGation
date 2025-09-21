@@ -8,15 +8,15 @@ import io
 import os
 import time
 import logging
-import subprocess
-import threading
-import atexit
-from datetime import datetime
-from threading import Condition
+# import subprocess
+# import threading
+# import atexit
+# from datetime import datetime
+# from threading import Condition
 
 # Third-party imports
-from flask import Flask, render_template, Response
-from flask_restful import Resource, Api
+# from flask import Flask, render_template, Response
+# from flask_restful import Resource, Api
 
 # Camera-specific imports
 try:
@@ -44,31 +44,22 @@ video_config = picam2.create_video_configuration(main={"size": (1640, 1232), "fo
 picam2.align_configuration(video_config)
 picam2.configure(video_config)
 
-# FFMPEG output config
-# HQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/hqstream", audio=False)
-# LQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/lqstream", audio=False)
-
-# HQoutput = FfmpegOutput("-f rtsp -rtsp_transport tcp rtsp://192.168.6.76:8554/hqstream", audio=False)
 HQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}:8554/hqstream", audio=False)
-
-LQoutput = FfmpegOutput("-f rtsp -rtsp_transport tcp rtsp://192.168.6.76:8554/lqstream", audio=False)
+# LQoutput = FfmpegOutput("-f rtsp -rtsp_transport tcp rtsp://192.168.6.76:8554/lqstream", audio=False)
 
 # Encoder settings
 encoder_HQ = H264Encoder(bitrate=4_000_000, repeat=True, iperiod=30)
-encoder_LQ = H264Encoder(repeat=True, iperiod=30, framerate=frame_rate, enable_sps_framerate=True)
+# encoder_LQ = H264Encoder(repeat=True, iperiod=30, framerate=frame_rate, enable_sps_framerate=True)
 
 try:
     print("trying to start camera streams")
     picam2.start_recording(encoder_HQ, HQoutput, quality=Quality.LOW)
-    picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW, name="lores")
+    # picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW, name="lores")
     print("Started camera streams")
     while True:
         time.sleep(5)
         still = picam2.capture_request()
         still.save("main", "/dev/shm/camera-tmp.jpg")
-        # still.save("main", "/home/allzero22/Webserver/webcam/static/pictures/camera-tmp.jpg")
-        # os.rename('/home/allzero22/Webserver/webcam/static/pictures/camera-tmp.jpg',
-        #           '/home/allzero22/Webserver/webcam/static/pictures/camera.jpg')
         still.release()
         # os.rename('/dev/shm/camera-tmp.jpg', '/dev/shm/camera.jpg') # make image replacement atomic operation
 except Exception as e:

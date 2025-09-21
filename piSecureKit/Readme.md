@@ -40,6 +40,8 @@ sudo reboot
 
 
 
+
+
 sudo LIBCAMERA_LOG_LEVELS=*:DEBUG \
 rpicam-vid -t 0 -n --width 1280 --height 720 --framerate 30 \
   --bitrate 2000000 --intra 60 --profile baseline --inline \
