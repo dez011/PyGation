@@ -261,7 +261,7 @@ def install_signal_handlers(stop_cb) -> None:
 
 def main() -> int:
     # Read host from env or default to your original
-    hub_host = os.getenv("PISECUREKIT_HUB", "192.168.6.76")
+    hub_host = os.getenv("PISECUREKIT_HUB", "pi5.local")
 
     cfg = AppConfig(
         rtsp=RtspConfig(host=hub_host, port=8554, path="hqstream"),
