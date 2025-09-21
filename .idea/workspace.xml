@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7e261bd-af72-4e5d-b464-2c0b0ae74921" name="Changes" comment="cam: removed restart always from service">
-      <change afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/main-new-shutsdown.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/main-old-works.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/piSecureKit/cams/zerov1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/piSecureKit/cams/zerov1/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -208,14 +207,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1743179594493</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Testing refactored main">
-      <option name="closed" value="true" />
-      <created>1756957962662</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1756957962662</updated>
     </task>
     <task id="LOCAL-00018" summary="Added stream to hub">
       <created>1757452926054</created>
@@ -599,7 +590,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758488262547</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="cam: removed restart always from service">
+      <option name="closed" value="true" />
+      <created>1758489001744</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1758489001744</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
