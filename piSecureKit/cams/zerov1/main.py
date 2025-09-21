@@ -24,7 +24,7 @@ CAMERA_AVAILABLE = True
 try:
     from picamera2 import Picamera2
     from picamera2.encoders import H264Encoder, Quality
-    from picamera2.outputs import FfmpegOutput, PyavOutput
+    from picamera2.outputs import FfmpegOutput
 except Exception as _exc:  # pragma: no cover (dev machines)
     LOG.warning("Camera modules not available: %s", _exc)
     CAMERA_AVAILABLE = False
@@ -48,7 +48,7 @@ class RtspConfig:
         if self.tcp:
             base += " -rtsp_transport tcp"
         # copy the encoded video stream, drop audio
-        return f"-an {base} -fflags +genpts"
+        return f"-c:v copy -an {base}"
 
 
 @dataclass(frozen=True)
@@ -71,7 +71,6 @@ class AppConfig:
     video: VideoConfig = VideoConfig()
     preview_jpeg_path: Path = Path("/dev/shm/camera-tmp.jpg")
     preview_interval_sec: float = 5.0
-    use_pyav_output: bool = True
 
 
 # ---------- Camera Abstraction ----------
@@ -118,24 +117,10 @@ class Picamera2Driver(CameraDriver):
             repeat=True,
             iperiod=self._cfg.video.iperiod
         )
-        self._using_pyav = False
-        if getattr(self._cfg, "use_pyav_output", False):
-            try:
-                # Use PyAV for better timestamp handling (see Picamera2 manual, PyavOutput section)
-                self._output = PyavOutput(self._cfg.rtsp.url(), format="rtsp")
-                self._using_pyav = True
-                LOG.info("Using PyavOutput (rtsp) for better timestamps")
-            except Exception as e:
-                LOG.warning("PyavOutput not available (%s); falling back to FfmpegOutput", e)
-                self._output = FfmpegOutput(
-                    f"{self._cfg.rtsp.ffmpeg_flags()} {self._cfg.rtsp.url()}",
-                    audio=False
-                )
-        else:
-            self._output = FfmpegOutput(
-                f"{self._cfg.rtsp.ffmpeg_flags()} {self._cfg.rtsp.url()}",
-                audio=False
-            )
+        self._output = FfmpegOutput(
+            f"{self._cfg.rtsp.ffmpeg_flags()} {self._cfg.rtsp.url()}",
+            audio=False
+        )
         self._started = False
 
         # Attempt a series of increasingly lighter configurations to avoid DMA/CMA OOM
