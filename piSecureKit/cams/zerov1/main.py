@@ -77,7 +77,7 @@ HQoutput = FfmpegOutput(f"-c:v copy -an -f rtsp -rtsp_transport tcp rtsp://{HUB}
 # LQoutput = FfmpegOutput("-f rtsp -rtsp_transport tcp rtsp://192.168.6.76:8554/lqstream", audio=False)
 
 # Encoder settings
-encoder_HQ = H264Encoder(bitrate=2_000_000, repeat=True, iperiod=60)
+# encoder_HQ = H264Encoder(bitrate=2_000_000, repeat=True, iperiod=60)
 # encoder_LQ = H264Encoder(repeat=True, iperiod=30, framerate=frame_rate, enable_sps_framerate=True)
 # Encoder settings (replace your encoder_LQ line)
 encoder_LQ = H264Encoder(bitrate=1_000_000, repeat=True, iperiod=10)
@@ -88,8 +88,8 @@ try:
     # picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW)
     # picam2.start_recording(encoder_LQ, LQoutput, quality=Quality.LOW, name="lores")
     #works
-    # picam2.start_recording(encoder_LQ, HQoutput, name="lores")
-    picam2.start_recording(encoder_LQ, HQoutput)
+    picam2.start_recording(encoder_LQ, HQoutput, name="lores")
+    # picam2.start_recording(encoder_LQ, HQoutput)
     print("Started camera streams")
     while True:
         time.sleep(5)
