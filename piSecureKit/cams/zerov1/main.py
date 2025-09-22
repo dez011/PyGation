@@ -50,7 +50,7 @@ video_config2 = picam2.create_video_configuration(
 )
 
 picam2.align_configuration(video_config)
-picam2.configure(video_config2)
+picam2.configure(video_config)
 
 # FFMPEG output config
 # HQoutput = FfmpegOutput("-f rtsp -rtsp_transport udp rtsp://myuser:mypass@localhost:8554/hqstream", audio=False)
